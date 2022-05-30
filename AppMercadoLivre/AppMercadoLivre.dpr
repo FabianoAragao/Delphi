@@ -2,8 +2,8 @@ program AppMercadoLivre;
 
 uses
   Vcl.Forms,
-  uFormPrincipal in 'uFormPrincipal.pas' {frmPrincipal},
-  uRequisicoes in 'servicos\uRequisicoes.pas';
+  uRequisicoes in 'servicos\uRequisicoes.pas',
+  uFormPrincipal in 'view\uFormPrincipal.pas' {frmPrincipal};
 
 {$R *.res}
 
