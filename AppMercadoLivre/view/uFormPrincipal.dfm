@@ -31,4 +31,22 @@ object frmPrincipal: TfrmPrincipal
       'Memo1')
     TabOrder = 1
   end
+  object BitBtn2: TBitBtn
+    Left = 264
+    Top = 160
+    Width = 75
+    Height = 25
+    Caption = 'BitBtn2'
+    TabOrder = 2
+    OnClick = BitBtn2Click
+  end
+  object BitBtn3: TBitBtn
+    Left = 176
+    Top = 160
+    Width = 75
+    Height = 25
+    Caption = 'BitBtn3'
+    TabOrder = 3
+    OnClick = BitBtn3Click
+  end
 end

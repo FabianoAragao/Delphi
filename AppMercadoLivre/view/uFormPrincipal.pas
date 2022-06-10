@@ -4,15 +4,24 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,IniFiles;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,IniFiles,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,uIConexaoComBancoDeDados,uConexao_Postgres,
+  FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys,
+  FireDAC.VCLUI.Wait;
 
 type
   TfrmPrincipal = class(TForm)
     BitBtn1: TBitBtn;
     Memo1: TMemo;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
   private
-    procedure ArquivoConfigINI;
     { Private declarations }
   public
     { Public declarations }
@@ -23,14 +32,13 @@ var
 
 implementation
 
-Uses uRequisicoes;
+Uses uRequisicoes_REST,uUsuario_View;
 
 {$R *.dfm}
 
 procedure TfrmPrincipal.BitBtn1Click(Sender: TObject);
 var
   sUrl:String;
-  slBody:tstringstream;
   rRequisicao:TRequisicoes;
 begin
 //  curl --location --request POST 'https://api.mercadolibre.com/oauth/token?client_id=4984208124132508&client_secret=2zv4GCbuFj6GdAKwhx962dYPh5bmrYo1&grant_type=client_credentials' \
@@ -62,16 +70,30 @@ begin
   end;
 end;
 
-procedure TfrmPrincipal.ArquivoConfigINI();
+procedure TfrmPrincipal.BitBtn2Click(Sender: TObject);
 var
-  Arquivo:tIniFile;
+  query   : TFDQuery;
+  conexao : IConexaoComBancoDeDados<TFDConnection>;
 begin
-  try
-    Arquivo := TIniFile.Create('C:\Configuracao.ini');
-    Arquivo.WriteString('CONFIG', 'Banco','');
-  finally
-    Arquivo.Free;
-  end;
+  query   := tFDQuery.Create(nil);
+  conexao := TConexaoPostgres<TFDConnection>.create;
+
+  query.ConnectionName := conexao.Conexao.ConnectionName;
+
+  query.SQL.Clear;
+  query.SQL.add('select nome from public.usuario where nome_de_usuario = ''fabianoxavante''');
+  query.Active := true;
+
+  showmessage(query.FieldByName('nome').AsString);
+end;
+
+procedure TfrmPrincipal.BitBtn3Click(Sender: TObject);
+var
+  fUsuario_view:TfUsuario_View;
+begin
+  Application.CreateForm(TfUsuario_View, fUsuario_view);
+
+  fUsuario_view.show;
 end;
 
 end.
