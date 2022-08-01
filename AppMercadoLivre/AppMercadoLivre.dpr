@@ -9,7 +9,8 @@ uses
   uAutenticacao_mercado_livre in 'servicos\uAutenticacao_mercado_livre.pas',
   uUsuario_Model in 'model\uUsuario_Model.pas',
   uUsuario_Controller in 'controller\uUsuario_Controller.pas',
-  uUsuario_View in 'view\uUsuario_View.pas' {fUsuario_View};
+  uUsuario_View in 'view\uUsuario_View.pas' {fUsuario_View},
+  uLogin_View in 'view\uLogin_View.pas' {fLogin_View};
 
 {$R *.res}
 

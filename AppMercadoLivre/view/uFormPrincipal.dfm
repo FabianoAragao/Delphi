@@ -49,4 +49,13 @@ object frmPrincipal: TfrmPrincipal
     TabOrder = 3
     OnClick = BitBtn3Click
   end
+  object BitBtn4: TBitBtn
+    Left = 95
+    Top = 160
+    Width = 75
+    Height = 25
+    Caption = 'BitBtn4'
+    TabOrder = 4
+    OnClick = BitBtn4Click
+  end
 end

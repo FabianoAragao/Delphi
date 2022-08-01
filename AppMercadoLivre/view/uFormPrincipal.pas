@@ -5,12 +5,14 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,IniFiles,
+
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client,uIConexaoComBancoDeDados,uConexao_Postgres,
   FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys,
-  FireDAC.VCLUI.Wait;
+  FireDAC.VCLUI.Wait, FireDAC.Comp.Client,
+
+  uIConexaoComBancoDeDados,uConexao_Postgres;
 
 type
   TfrmPrincipal = class(TForm)
@@ -18,9 +20,11 @@ type
     Memo1: TMemo;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,7 +36,7 @@ var
 
 implementation
 
-Uses uRequisicoes_REST,uUsuario_View;
+Uses uRequisicoes_REST,uUsuario_View, uLogin_View;
 
 {$R *.dfm}
 
@@ -89,11 +93,27 @@ end;
 
 procedure TfrmPrincipal.BitBtn3Click(Sender: TObject);
 var
-  fUsuario_view:TfUsuario_View;
+  fLogin_View : TfLogin_View;
 begin
-  Application.CreateForm(TfUsuario_View, fUsuario_view);
+  Application.CreateForm(TfLogin_View, fLogin_View);
 
-  fUsuario_view.show;
+  fLogin_View.show;
+end;
+
+procedure TfrmPrincipal.BitBtn4Click(Sender: TObject);
+var
+  query   : TFDQuery;
+  conexao : IConexaoComBancoDeDados<TFDConnection>;
+begin
+  query   := tFDQuery.Create(nil);
+  conexao := TConexaoPostgres<TFDConnection>.create;
+
+  query.ConnectionName := conexao.Conexao.ConnectionName;
+
+  query.SQL.Clear;
+  query.SQL.add('insert into public.usuario (nome, nome_de_usuario, senha) values(''Fabiano'',''fabianoxavante'', ''123456'')');
+  query.ExecSQL;
+
 end;
 
 end.
