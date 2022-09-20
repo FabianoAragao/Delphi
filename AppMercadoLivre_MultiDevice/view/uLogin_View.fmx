@@ -1,44 +1,238 @@
 object fLogin_View: TfLogin_View
-  Left = 0
-  Top = 0
-  BorderStyle = Single
+  Left = 403
+  Top = 106
+  BorderStyle = None
   Caption = 'Form2'
   ClientHeight = 480
-  ClientWidth = 640
-  Fill.Kind = Gradient
-  Fill.Gradient.Points = <
-    item
-      Color = xFFF7FF0F
-      Offset = 0.000000000000000000
-    end
-    item
-      Color = xFFF9FFC4
-      Offset = 1.021739125251770000
-    end>
-  Fill.Gradient.StartPosition.Y = 0.318014889955520600
-  Fill.Gradient.StopPosition.X = 1.000000000000000000
-  Fill.Gradient.StopPosition.Y = 0.681985080242157000
+  ClientWidth = 494
+  Position = Designed
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  Left = 403
+  Top = 106
   DesignerMasterStyle = 0
-  object Layout1: TLayout
-    Align = Center
-    Size.Width = 526.000000000000000000
-    Size.Height = 280.000000000000000000
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Size.Width = 494.000000000000000000
+    Size.Height = 480.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 0
-    object Rectangle1: TRectangle
-      Align = Client
-      Fill.Color = claWhite
-      Opacity = 0.800000011920929000
-      Size.Width = 526.000000000000000000
-      Size.Height = 280.000000000000000000
+    Stroke.Color = xFFE5E5E5
+    XRadius = 10.000000000000000000
+    YRadius = 10.000000000000000000
+    object GridPanelLayout1: TGridPanelLayout
+      Align = Center
+      Size.Width = 417.000000000000000000
+      Size.Height = 412.000000000000000000
       Size.PlatformDefault = False
-      Stroke.Kind = None
-      Stroke.Cap = Round
-      XRadius = 10.000000000000000000
-      YRadius = 10.000000000000000000
+      TabOrder = 0
+      ColumnCollection = <
+        item
+          Value = 100.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          Control = Layout2
+          Row = 0
+        end
+        item
+          Column = 0
+          Control = Layout3
+          Row = 1
+        end
+        item
+          Column = 0
+          Control = Layout4
+          Row = 2
+        end
+        item
+          Column = 0
+          Control = Layout5
+          Row = 3
+        end>
+      RowCollection = <
+        item
+          Value = 22.372731397698260000
+        end
+        item
+          Value = 22.360977408082480000
+        end
+        item
+          Value = 22.376828967551310000
+        end
+        item
+          Value = 32.889462226667940000
+        end>
+      object Layout2: TLayout
+        Align = Client
+        Size.Width = 417.000000000000000000
+        Size.Height = 92.175651550292970000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Text1: TText
+          Align = Center
+          Size.Width = 384.000000000000000000
+          Size.Height = 77.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Ol'#225'! Digite o seu usu'#225'rio e senha'
+          TextSettings.Font.Size = 30.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Leading
+        end
+      end
+      object Layout3: TLayout
+        Align = Client
+        Size.Width = 417.000000000000000000
+        Size.Height = 92.127235412597660000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object Label1: TLabel
+          StyledSettings = [Family, FontColor]
+          Position.X = 16.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 120.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 15.000000000000000000
+          Text = 'Usu'#225'rio'
+          TabOrder = 0
+        end
+        object Rectangle2: TRectangle
+          Fill.Color = claWhite
+          Position.X = 16.000000000000000000
+          Position.Y = 31.000000000000000000
+          Size.Width = 385.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = claSilver
+          XRadius = 5.000000000000000000
+          YRadius = 5.000000000000000000
+          object Edit1: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            StyleLookup = 'transparentedit'
+            TabOrder = 1
+            Text = 'Nome de usu'#225'rio'
+            TextSettings.Font.Size = 16.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Size.Width = 375.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+            OnKeyDown = Edit1KeyDown
+            OnEnter = Edit1Enter
+            OnExit = Edit1Exit
+          end
+        end
+      end
+      object Layout4: TLayout
+        Align = Client
+        Size.Width = 417.000000000000000000
+        Size.Height = 92.192535400390630000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Label2: TLabel
+          StyledSettings = [Family, FontColor]
+          Position.X = 16.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 120.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 15.000000000000000000
+          Text = 'Senha'
+          TabOrder = 0
+        end
+        object Rectangle3: TRectangle
+          Fill.Color = claWhite
+          Position.X = 16.000000000000000000
+          Position.Y = 32.000000000000000000
+          Size.Width = 386.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = claSilver
+          XRadius = 5.000000000000000000
+          YRadius = 5.000000000000000000
+          object Edit2: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            StyleLookup = 'transparentedit'
+            TabOrder = 1
+            Password = True
+            Text = 'transparentedit'
+            TextSettings.Font.Size = 16.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Size.Width = 376.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, Style, FontColor]
+            OnKeyDown = Edit2KeyDown
+            OnEnter = Edit2Enter
+            OnExit = Edit2Exit
+          end
+        end
+      end
+      object Layout5: TLayout
+        Align = Client
+        Size.Width = 417.000000000000000000
+        Size.Height = 135.504577636718800000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object RectContinuar: TRectangle
+          Fill.Color = xFF3483FA
+          Position.X = 80.000000000000000000
+          Position.Y = 13.000000000000000000
+          Size.Width = 265.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 10.000000000000000000
+          YRadius = 10.000000000000000000
+          OnClick = RectContinuarClick
+          object Text3: TText
+            Align = Center
+            Enabled = False
+            Size.Width = 94.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Continuar'
+            TextSettings.Font.Family = 'Roboto'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+          end
+        end
+        object RectFechar: TRectangle
+          Fill.Color = claNull
+          Position.X = 80.000000000000000000
+          Position.Y = 72.000000000000000000
+          Size.Width = 265.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 10.000000000000000000
+          YRadius = 10.000000000000000000
+          OnClick = RectFecharClick
+          OnMouseDown = RectFecharMouseDown
+          OnMouseEnter = RectFecharMouseEnter
+          OnMouseLeave = RectFecharMouseLeave
+          object Text2: TText
+            Align = Center
+            Enabled = False
+            Size.Width = 50.000000000000000000
+            Size.Height = 34.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Fechar'
+            TextSettings.Font.Family = 'Roboto'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = xFF3483FA
+          end
+        end
+      end
     end
   end
 end

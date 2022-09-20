@@ -7,15 +7,9 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.InertialMovement,
 
-  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys,
-  FireDAC.VCLUI.Wait, FireDAC.Comp.Client,
-
-  uConexao_Postgres, uIConexaoComBancoDeDados, FireDAC.FMXUI.Wait,
+  uConexao_Firedac_Postgres, uIConexao_bancoDeDados, FireDAC.FMXUI.Wait,
   FMX.Memo.Types, FMX.ScrollBox, FMX.Memo, FMX.Objects, FMX.Layouts, FMX.Ani,
-  FMX.TabControl, FMX.Effects, FMX.MultiView;
+  FMX.TabControl, FMX.Effects, FMX.MultiView, uSessao_Model;
 
 type
   TFormPrincipal = class(TForm)
@@ -56,22 +50,17 @@ type
     ShadowEffect6: TShadowEffect;
     Image6: TImage;
     Label8: TLabel;
-    TabItem2: TTabItem;
-    TabItem3: TTabItem;
-    Rectangle1: TRectangle;
+    RectCabecalho: TRectangle;
     Label2: TLabel;
     Label1: TLabel;
-    Circle1: TCircle;
-    BitmapListAnimation1: TBitmapListAnimation;
-    Layout2: TLayout;
-    MultiView1: TMultiView;
-    Rectangle3: TRectangle;
-    btnMaster: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
-    SpeedButton6: TSpeedButton;
+    RectMenu: TRectangle;
+    Line1: TLine;
+    SpeedButton1: TSpeedButton;
+    ImgMasterbutton: TImage;
+    Text1: TText;
+    ImgLogo: TImage;
+    FloatAnimationMenu: TFloatAnimation;
+    FloatAnimationImgMasterButton: TFloatAnimation;
     procedure Rectangle1MouseLeave(Sender: TObject);
     procedure Rectangle1MouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Single);
@@ -80,12 +69,16 @@ type
       Shift: TShiftState; X, Y: Single);
     procedure Rectangle2MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
-    procedure ScrollBox1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure Rectangle2Click(Sender: TObject);
   private
     procedure ConfigScroolBox;
+    procedure logof;
     { Private declarations }
   public
     { Public declarations }
+
+    sessao : TSessao_Model;
   end;
 
 var
@@ -124,9 +117,32 @@ begin
   end;
 end;
 
+procedure TFormPrincipal.logof();
+begin
+  try
+    self.Visible := false;
+    Application.CreateForm(TfLogin_View, fLogin_View);
+    fLogin_View.ShowModal;
+
+    if(sessao.getUsuario.id = 0)then
+      self.Close
+    else
+      begin
+        label1.Text := sessao.getUsuario.Nome_de_usuario;
+      end;
+
+  finally
+    fLogin_View.Free;
+
+    self.Visible := true;
+  end;
+end;
+
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
   self.ConfigScroolBox;
+
+  logof();
 end;
 
 procedure TFormPrincipal.Rectangle1MouseLeave(Sender: TObject);
@@ -138,6 +154,13 @@ procedure TFormPrincipal.Rectangle1MouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Single);
 begin
   (Sender as TRectangle).Fill.color := $FFF6FF7B;
+end;
+
+procedure TFormPrincipal.Rectangle2Click(Sender: TObject);
+var
+  fLogin_View : TfLogin_View;
+begin
+  logof();
 end;
 
 procedure TFormPrincipal.Rectangle2MouseDown(Sender: TObject;
@@ -152,9 +175,28 @@ begin
   (Sender as TRectangle).Fill.color := $FFF6FF7B;
 end;
 
-procedure TFormPrincipal.ScrollBox1Click(Sender: TObject);
+procedure TFormPrincipal.SpeedButton1Click(Sender: TObject);
 begin
+  if RectMenu.Width = 60 then
+    begin
+      FloatAnimationMenu.StartValue := 60;
+      FloatAnimationMenu.StopValue  := 204;
+      FloatAnimationMenu.Start;
 
+      FloatAnimationImgMasterButton.StartValue := 0;
+      FloatAnimationImgMasterButton.StopValue  := 90;
+      FloatAnimationImgMasterButton.Start;
+    end
+  else
+    begin
+      FloatAnimationMenu.StartValue := 204;
+      FloatAnimationMenu.StopValue  := 60;
+      FloatAnimationMenu.Start;
+
+      FloatAnimationImgMasterButton.StartValue := 90;
+      FloatAnimationImgMasterButton.StopValue  := 0;
+      FloatAnimationImgMasterButton.Start;
+    end;
 end;
 
 //#FFEEFF0C

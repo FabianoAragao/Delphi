@@ -140,8 +140,7 @@
         <DCCReference Include="controller\uUsuario_Controller.pas"/>
         <DCCReference Include="model\uUsuario_Model.pas"/>
         <DCCReference Include="servicos\uAutenticacao_mercado_livre.pas"/>
-        <DCCReference Include="servicos\uConexao_Postgres.pas"/>
-        <DCCReference Include="servicos\interfaces\uIConexaoComBancoDeDados.pas"/>
+        <DCCReference Include="servicos\uConexao_Firedac_Postgres.pas"/>
         <DCCReference Include="view\uLogin_View.pas">
             <Form>fLogin_View</Form>
             <FormType>fmx</FormType>
@@ -149,6 +148,9 @@
         <DCCReference Include="servicos\uRequisicoes_REST_Indy.pas"/>
         <DCCReference Include="servicos\interfaces\uIRequisicoes_REST.pas"/>
         <DCCReference Include="servicos\enum\uEPropriedadeRequisicao.pas"/>
+        <DCCReference Include="servicos\interfaces\uIConexao_bancoDeDados.pas"/>
+        <DCCReference Include="model\uSessao_Model.pas"/>
+        <DCCReference Include="DAO\uUsuario_DAO.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
