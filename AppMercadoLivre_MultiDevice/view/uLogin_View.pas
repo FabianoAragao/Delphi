@@ -6,7 +6,7 @@ uses
   System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.Edit,
-  FMX.TabControl, uFormPrincipal, uSessao_Model;
+  FMX.TabControl,  uSessao_Model;
 
 type
   TfLogin_View = class(TForm)
@@ -36,7 +36,6 @@ type
     procedure RectFecharClick(Sender: TObject);
     procedure RectFecharMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
-    procedure RectContinuarClick(Sender: TObject);
     procedure Edit1KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure Edit2KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
@@ -96,52 +95,6 @@ procedure TfLogin_View.Edit2KeyDown(Sender: TObject; var Key: Word;
 begin
   if(Key = vkTab)or(Key = vkReturn)then
     RectContinuar.SetFocus;
-end;
-
-procedure TfLogin_View.RectContinuarClick(Sender: TObject);
-var
-  usuarioController: TUsuario_Controller;
-  usuarioModel     : TUsuario_Model;
-  sql              : string;
-  usuario          : string;
-  senha            : string;
-begin
-  if (edit1.Text = '')or(edit1.Text = 'Nome de usuário') then
-    ShowMessage('Digite o nome de usuário.')
-  else if(edit2.Text = '')or(edit2.Text = 'transparentedit')then
-    ShowMessage('Digite a senha.');
-
-  usuario := stringreplace(edit1.Text, '''', '',[rfReplaceAll]);
-  senha   := stringreplace(edit2.Text, '''', '',[rfReplaceAll]);
-
-  sql := 'SELECT * FROM  public.usuario WHERE nome_de_usuario = ';
-  sql := sql + ' ''' + usuario + ''' and senha = ''' + senha + ''' ';
-
-  try
-    usuarioController := nil;
-    usuarioModel      := nil;
-
-    usuarioController := TUsuario_Controller.Create();
-
-    usuarioModel := usuarioController.buscar(sql);
-
-    if(usuarioModel <> nil)and(usuarioModel.id > 0)then
-      begin
-        sessao := TSessao_Model.Create(usuarioModel);
-        self.Close;
-      end
-    else
-      begin
-        ShowMessage('Usuário ou senha incorreto.');
-        exit;
-      end;
-
-
-  finally
-    if(usuarioController <> nil)then
-      usuarioController.free;
-  end;
-
 end;
 
 procedure TfLogin_View.RectFecharClick(Sender: TObject);

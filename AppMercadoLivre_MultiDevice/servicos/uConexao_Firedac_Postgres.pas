@@ -2,9 +2,10 @@ unit uConexao_Firedac_Postgres;
 
 interface
 
-uses uIConexao_bancoDeDados, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
-  FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
-  FireDAC.Phys, FireDAC.Phys.PG, FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait,
+uses uIConexao_bancoDeDados, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
+  FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait,
   Data.DB, FireDAC.Comp.Client;
 
 type
@@ -14,7 +15,13 @@ type
       class var Conexao:TFDConnection;
     public
       function getConexao(): TFDConnection;
-      procedure criaQuery(var query: TFDQuery; const sql: string);
+      procedure iniciaTransacao;
+      procedure commit;
+      procedure rollback;
+
+      function Execute(const ACmd: String; var Error: String): Boolean;
+      function ExecuteQuery(const ACmd: String): TFDQuery;
+
       constructor create;
     private
       function criaConexao(): TFDConnection;
@@ -76,14 +83,63 @@ begin
   result := self.Conexao;
 end;
 
-procedure TConexaoFiredacPostgres.criaQuery(var query: TFDQuery; const sql: string);
+procedure TConexaoFiredacPostgres.iniciaTransacao;
 begin
-  query := tFDQuery.Create(nil);
+  Conexao.TxOptions.EnableNested := true;
+  Conexao.TxOptions.AutoCommit   := false;
 
-  query.ConnectionName := self.getConexao().ConnectionName;
+  Conexao.StartTransaction;
+end;
 
-  query.SQL.Clear;
-  query.SQL.add(sql);
+procedure TConexaoFiredacPostgres.commit;
+begin
+  if(conexao.InTransaction)then
+    begin
+      Conexao.Commit;
+    end
+  else
+    raise Exception.Create('Tentatva de commit sem transação iniciada');
+end;
+
+procedure TConexaoFiredacPostgres.rollback;
+begin
+  if(conexao.InTransaction)then
+    begin
+      Conexao.Rollback;
+    end
+  else
+    raise Exception.Create('Tentatva de commit sem transação iniciada');
+end;
+
+function TConexaoFiredacPostgres.Execute(const ACmd: String; var Error: String): Boolean;
+begin
+  Result := True;
+  try
+    conexao.ExecSQL(ACmd);
+  except
+    on E: Exception do
+      begin
+        Error := E.Message;
+        Result := False;
+      end;
+  end;
+end;
+
+function TConexaoFiredacPostgres.ExecuteQuery(const ACmd: String): TFDQuery;
+begin
+  Result := TFDQuery.Create(nil);
+  try
+    with Result do
+      begin
+        Connection := conexao;
+        Close;
+        SQL.Clear;
+        SQL.Add(ACmd);
+        Open;
+      end;
+  except
+    Result := nil;
+  end;
 end;
 
 end.

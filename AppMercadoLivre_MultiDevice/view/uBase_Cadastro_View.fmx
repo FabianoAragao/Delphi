@@ -1,0 +1,117 @@
+object fBaseCadastro_View: TfBaseCadastro_View
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object tabControl: TTabControl
+    Align = Top
+    Size.Width = 640.000000000000000000
+    Size.Height = 425.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    Sizes = (
+      640s
+      399s
+      640s
+      399s)
+    object tabListagem: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 68.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Listagem'
+      ExplicitSize.cx = 68.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object grdListagem: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 640.000000000000000000
+        Size.Height = 399.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 636.000000000000000000
+        Viewport.Height = 374.000000000000000000
+      end
+    end
+    object tabCadastro: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 68.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Cadastro'
+      ExplicitSize.cx = 68.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+    end
+  end
+  object pnlRodaPe: TPanel
+    Align = Bottom
+    Position.Y = 424.000000000000000000
+    Size.Width = 640.000000000000000000
+    Size.Height = 56.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object btnInserir: TButton
+      Position.X = 3.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 90.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Inserir'
+    end
+    object btnAlterar: TButton
+      Position.X = 95.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 90.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Alterar'
+    end
+    object btnCancelar: TButton
+      Position.X = 187.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 90.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Cancelar'
+    end
+    object btnSalvar: TButton
+      Position.X = 279.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 90.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Salvar'
+    end
+    object btnExcluir: TButton
+      Position.X = 370.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 90.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Excluir'
+    end
+  end
+end

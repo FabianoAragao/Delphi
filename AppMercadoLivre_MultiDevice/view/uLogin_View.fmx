@@ -191,7 +191,6 @@ object fLogin_View: TfLogin_View
           Stroke.Kind = None
           XRadius = 10.000000000000000000
           YRadius = 10.000000000000000000
-          OnClick = RectContinuarClick
           object Text3: TText
             Align = Center
             Enabled = False
